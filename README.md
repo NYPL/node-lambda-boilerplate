@@ -1,7 +1,7 @@
 # Node Lambda Boilerplate
 [![Coverage Status](https://coveralls.io/repos/github/NYPL/node-lambda-boilerplate/badge.svg)](https://coveralls.io/github/NYPL/node-lambda-boilerplate)
 [![Build Status](https://travis-ci.org/NYPL/node-lambda-boilerplate.svg?branch=master)](https://travis-ci.org/NYPL/node-lambda-boilerplate)
-[![Dependency Status](https://gemnasium.com/badges/github.com/NYPL/cancel-request-consumer.svg)](https://gemnasium.com/github.com/NYPL/node-lambda-boilerplate)
+[![Dependency Status](https://gemnasium.com/badges/github.com/NYPL/node-lambda-boilerplate.svg)](https://gemnasium.com/github.com/NYPL/node-lambda-boilerplate)
 
 A boilerplate (starter kit) for writing AWS Lambdas in Node using the [node-lambda](https://www.npmjs.com/package/node-lambda) module. Supports ES7 syntax via babel and contains pre-configured NPM scripts found in `package.json` that enable you to run your lambda locally, test your code, package and deploy your lambda to AWS based of your `aws-profile`.
 
