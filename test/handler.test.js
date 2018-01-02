@@ -14,7 +14,7 @@ const expect = chai.expect;
 const kinesisHandlerFunc = Lambda.kinesisHandler;
 const handleKinesisAsyncProcessing = Lambda.handleKinesisAsyncProcessing;
 
-describe('Lambda: Handle Kinesis Stream Input', () => {
+describe('Handlers [index.js]', () => {
   describe('exports.handler()', () => {
     let kinesisHandlerStub;
 

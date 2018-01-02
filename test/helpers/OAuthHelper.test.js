@@ -9,7 +9,7 @@ const expect = chai.expect;
 chai.should();
 chai.use(chaiAsPromised);
 
-describe('Lambda: OAuthHelper', () => {
+describe('OAuth Helper', () => {
   let mock;
 
   beforeEach(() => {

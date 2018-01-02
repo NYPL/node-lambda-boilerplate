@@ -1,6 +1,6 @@
 {
   "name": "node-lambda-boilerplate",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An AWS node-lambda boilerplate written in ES7 via Babel that includes various configuration, testing, and deployment scripts",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,8 @@
     "clean": "./node_modules/.bin/rimraf dist",
     "lint": "./node_modules/.bin/standard",
     "local-run": "npm run build && ./node_modules/.bin/node-lambda run -f ./config/local.env -j ./sample/sample_event.json --handler dist/index.handler",
-    "deploy:development": "npm run build && ./node_modules/.bin/node-lambda deploy -e development -f ./config/development.env -S config/event_sources_dev.json --handler dist/index.handler --role arn:aws:iam::224280085904:role/lambda_basic_execution --profile nypl-sandbox",
-    "deploy:production": "npm run build && ./node_modules/.bin/node-lambda deploy -e production -f ./config/produdction.env -S config/event_sources_prod.json --handler dist/index.handler --role arn:aws:iam::946183545209:role/lambda-full-access --profile nypl-digital-dev",
-    "package": "./node_modules/.bin/node-lambda package",
+    "deploy:development": "npm run build && ./node_modules/.bin/node-lambda deploy -e development -f ./config/development.env -S config/event_sources_development.json --handler dist/index.handler --role arn:aws:iam::224280085904:role/lambda_basic_execution --profile nypl-sandbox",
+    "deploy:production": "npm run build && ./node_modules/.bin/node-lambda deploy -e production -f ./config/produdction.env -S config/event_sources_production.json --handler dist/index.handler --role arn:aws:iam::946183545209:role/lambda-full-access --profile nypl-digital-dev",
     "setup:node-lambda-env": "cp ./sample/.env.sample ./.env",
     "setup:local-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/local.env",
     "setup:development-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/development.env",
@@ -19,7 +18,7 @@
     "setup:production-sources": "mkdir -p config && cp ./sample/sample_event_sources.json ./config/event_sources_production.json",
     "test": "NODE_ENV=test ./node_modules/.bin/nyc --reporter=lcov --reporter=text ./node_modules/mocha/bin/mocha",
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls",
-    "coverage:report": "./node_modules/.bin/nyc report --reporter=html && npm run open-report",
+    "coverage:report": "./node_modules/.bin/nyc report --reporter=html && npm run coverage:open-report",
     "coverage:open-report": "open -a 'Google Chrome' ./coverage/index.html"
   },
   "repository": {
@@ -77,6 +76,7 @@
     "instrument": false,
     "exclude": [
       "**/*.spec.js",
+      "**/**/*.spec.js",
       "dist/*",
       "src/helpers/ErrorHelper.js",
       "src/utilities/Logger.js"
