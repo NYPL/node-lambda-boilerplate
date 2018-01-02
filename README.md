@@ -1,5 +1,5 @@
 # Node Lambda Boilerplate
-[![Coverage Status](https://coveralls.io/repos/github/NYPL/node-lambda-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/NYPL/node-lambda-boilerplate?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/NYPL/node-lambda-boilerplate/badge.svg)](https://coveralls.io/github/NYPL/node-lambda-boilerplate)
 [![Build Status](https://travis-ci.org/NYPL/node-lambda-boilerplate.svg?branch=master)](https://travis-ci.org/NYPL/node-lambda-boilerplate)
 [![Dependency Status](https://gemnasium.com/badges/github.com/NYPL/cancel-request-consumer.svg)](https://gemnasium.com/github.com/NYPL/node-lambda-boilerplate)
 
