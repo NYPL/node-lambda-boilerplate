@@ -1,5 +1,5 @@
 {
-  "name": "node-lambda-boilerplate",
+  "name": "@nypl/node-lambda-boilerplate",
   "version": "1.0.0",
   "description": "An AWS node-lambda boilerplate written in ES7 via Babel that includes various configuration, testing, and deployment scripts",
   "main": "index.js",
