@@ -17,7 +17,10 @@ exports.handleKinesisAsyncProcessing = async function (records, opts, context, c
     } = opts;
 
     // Example of async/await promise handling
-    const tokenResponse = await fetchAccessToken(oAuthProviderUrl, oAuthClientId, oAuthClientSecret, oAuthProviderScope);
+    const tokenResponse = await handleAuthentication(
+      Cache.getToken(),
+      fetchAccessToken(oAuthProviderUrl, oAuthClientId, oAuthClientSecret, oAuthProviderScope)
+    );
 
     if (tokenResponse.tokenType === 'new-token') {
       logger.info('Obtained a new access token from the OAuth Service');
@@ -41,35 +44,35 @@ exports.handleKinesisAsyncProcessing = async function (records, opts, context, c
 exports.kinesisHandler = (records, opts, context, callback) => {
   try {
     if (!opts || Object.keys(opts).length === 0) {
-      throw new CancelRequestConsumerError(
+      throw new LambdaError(
         'missing/undefined opts object configuration parameter',
         { type: 'function-parameter-error' }
       );
     }
 
     if (!opts.oAuthProviderUrl || typeof opts.oAuthProviderUrl !== 'string' || opts.oAuthProviderUrl.trim() === '') {
-      throw new CancelRequestConsumerError(
+      throw new LambdaError(
         'missing/undefined oAuthProviderUrl configuration parameter',
         { type: 'function-parameter-error' }
       );
     }
 
     if (!opts.oAuthClientId || typeof opts.oAuthClientId !== 'string' || opts.oAuthClientId.trim() === '') {
-      throw new CancelRequestConsumerError(
+      throw new LambdaError(
         'missing/undefined oAuthClientId configuration parameter',
         { type: 'function-parameter-error' }
       );
     }
 
     if (!opts.oAuthClientSecret || typeof opts.oAuthClientSecret !== 'string' || opts.oAuthClientSecret.trim() === '') {
-      throw new CancelRequestConsumerError(
+      throw new LambdaError(
         'missing/undefined oAuthClientSecret configuration parameter',
         { type: 'function-parameter-error' }
       );
     }
 
     if (!opts.oAuthProviderScope || typeof opts.oAuthProviderScope !== 'string' || opts.oAuthProviderScope.trim() === '') {
-      throw new CancelRequestConsumerError(
+      throw new LambdaError(
         'missing/undefined oAuthProviderScope configuration parameter',
         { type: 'function-parameter-error' }
       );
@@ -97,7 +100,7 @@ exports.handler = (event, context, callback) => {
             oAuthProviderUrl: process.env.OAUTH_PROVIDER_URL,
             oAuthClientId: process.env.OAUTH_CLIENT_ID,
             oAuthClientSecret: process.env.OAUTH_CLIENT_SECRET,
-            oAuthProviderScope: process.env.OAUTH_PROVIDER_SCOPE,
+            oAuthProviderScope: process.env.OAUTH_PROVIDER_SCOPE
           },
           context,
           callback
