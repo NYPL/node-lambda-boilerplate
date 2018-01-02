@@ -29,6 +29,7 @@ exports.handleKinesisAsyncProcessing = async function (records, opts, context, c
       logger.info('Using existing access token from Cache');
     }
 
+    console.log(tokenResponse);
     return callback(null, 'The Lambda has successfully completed all operations; no fatal errors have occured');
   } catch (e) {
     if (typeof e === 'string' || e instanceof String) {
