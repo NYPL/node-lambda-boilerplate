@@ -1,0 +1,24 @@
+# Distribution directory (Babel)
+dist/*
+
+# Dependency directory
+node_modules
+
+# Lambda directory created by node-lambda module
+.lambda
+
+# Logs
+logs
+*.log
+
+# Coverage directory used by tools like Istanbul
+coverage
+
+# Users Environment Variables
+.lock-wscript
+config/*.env
+
+# Misc
+.DS_Store
+*.swp
+*.nyc_output

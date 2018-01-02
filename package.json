@@ -1,0 +1,95 @@
+{
+  "name": "node-lambda-boilerplate",
+  "version": "0.0.1",
+  "description": "An AWS node-lambda boilerplate written in ES7 via Babel that includes various configuration, testing, and deployment scripts",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run clean && babel index.js --out-dir dist && babel src --out-dir dist/src",
+    "clean": "./node_modules/.bin/rimraf dist",
+    "lint": "./node_modules/.bin/standard",
+    "local-run": "npm run build && ./node_modules/.bin/node-lambda run -f ./config/local.env -j ./sample/sample_event.json --handler dist/index.handler",
+    "deploy:development": "npm run build && ./node_modules/.bin/node-lambda deploy -e development -f ./config/development.env -S config/event_sources_dev.json --handler dist/index.handler --role arn:aws:iam::224280085904:role/lambda_basic_execution --profile nypl-sandbox",
+    "deploy:production": "npm run build && ./node_modules/.bin/node-lambda deploy -e production -f ./config/produdction.env -S config/event_sources_prod.json --handler dist/index.handler --role arn:aws:iam::946183545209:role/lambda-full-access --profile nypl-digital-dev",
+    "package": "./node_modules/.bin/node-lambda package",
+    "setup:node-lambda-env": "cp ./sample/.env.sample ./.env",
+    "setup:local-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/local.env",
+    "setup:development-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/development.env",
+    "setup:production-env": "mkdir -p config && cp ./sample/deployment.env.sample ./config/production.env",
+    "setup:development-sources": "cp ./sample/sample_event_sources.json ./config/event_sources_development.json",
+    "setup:production-sources": "cp ./sample/sample_event_sources.json ./config/event_sources_production.json",
+    "test": "NODE_ENV=test ./node_modules/.bin/nyc --reporter=lcov --reporter=text ./node_modules/mocha/bin/mocha",
+    "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls",
+    "coverage:report": "./node_modules/.bin/nyc report --reporter=html && npm run open-report",
+    "coverage:open-report": "open -a 'Google Chrome' ./coverage/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NYPL/node-lambda-boilerplate.git"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "node",
+    "kinesis",
+    "streams",
+    "node-lambda",
+    "boilerplate",
+    "starter"
+  ],
+  "author": "Rafael Hernandez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NYPL/node-lambda-boilerplate/issues"
+  },
+  "homepage": "https://github.com/NYPL/node-lambda-boilerplate#readme",
+  "dependencies": {
+    "async": "2.6.0",
+    "aws-sdk": "2.176.0",
+    "axios": "0.17.1",
+    "babel-runtime": "6.26.0",
+    "lambda-env-vars": "0.4.0",
+    "qs": "6.5.1",
+    "winston": "2.4.0"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "1.10.0",
+    "babel-cli": "6.26.0",
+    "babel-plugin-istanbul": "4.1.5",
+    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-preset-env": "1.6.1",
+    "babel-register": "6.26.0",
+    "chai": "4.1.2",
+    "chai-as-promised": "7.1.1",
+    "coveralls": "3.0.0",
+    "mocha": "4.1.0",
+    "node-lambda": "0.11.5",
+    "nyc": "11.4.1",
+    "rimraf": "2.6.2",
+    "sinon": "4.1.3",
+    "sinon-chai": "2.14.0",
+    "standard": "10.0.3"
+  },
+  "nyc": {
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false,
+    "exclude": [
+      "**/*.spec.js",
+      "dist/*",
+      "src/helpers/ErrorHelper.js",
+      "src/utilities/Logger.js"
+    ]
+  },
+  "standard": {
+    "env": {
+      "mocha": true
+    },
+    "ignore": [
+      "/sample/",
+      "/build/",
+      "config"
+    ]
+  }
+}

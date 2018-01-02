@@ -1,0 +1,10 @@
+{
+  "EventSourceMappings": [
+    {
+      "EventSourceArn": "<STREAM ARN IN AWS KINESIS CONSOLE>",
+      "StartingPosition": "LATEST",
+      "BatchSize": 50,
+      "Enabled": true
+    }
+  ]
+}
